@@ -1,0 +1,7 @@
+apiVersion: k8s.suse.com/v1alpha1
+kind: Space
+metadata:
+  name: space-sample
+spec:
+  # Add fields here
+  foo: bar

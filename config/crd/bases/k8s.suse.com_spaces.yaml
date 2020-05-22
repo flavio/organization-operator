@@ -1,0 +1,84 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.2.4
+  creationTimestamp: null
+  name: spaces.k8s.suse.com
+spec:
+  group: k8s.suse.com
+  names:
+    kind: Space
+    listKind: SpaceList
+    plural: spaces
+    singular: space
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      description: Space is the Schema for the spaces API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: SpaceSpec defines the desired state of Space
+          properties:
+            admin_groups:
+              description: Optional names of groups with admin rights
+              items:
+                type: string
+              type: array
+            admins:
+              description: Optional names of users with admin rights
+              items:
+                type: string
+              type: array
+            editor_groups:
+              description: Optional names of groups with edit rights
+              items:
+                type: string
+              type: array
+            editors:
+              description: Optional names of users with edit rights
+              items:
+                type: string
+              type: array
+            viewer_groups:
+              description: optional names of groups with view rights
+              items:
+                type: string
+              type: array
+            viewers:
+              description: Optional names of users with view rights
+              items:
+                type: string
+              type: array
+          type: object
+        status:
+          description: SpaceStatus defines the observed state of Space
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

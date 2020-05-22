@@ -1,0 +1,10 @@
+domain: suse.com
+repo: github.com/flavio/organization-operator
+resources:
+- group: k8s
+  kind: Organization
+  version: v1alpha1
+- group: k8s
+  kind: Space
+  version: v1alpha1
+version: "2"
