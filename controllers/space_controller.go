@@ -36,7 +36,6 @@ import (
 
 const labelOrganization = "organization-operator.k8s.suse.com/organization"
 const labelSpace = "organization-operator.k8s.suse.com/space"
-const spaceFinalizer = "organization-operator.k8s.suse.com"
 
 // SpaceReconciler reconciles a Space object
 type SpaceReconciler struct {
@@ -194,7 +193,7 @@ func (r *SpaceReconciler) handleFinalizer(instance *k8sv1alpha1.Space, organizat
 	finalizerFound := false
 	newFinalizers := []string{}
 	for _, finalizer := range instance.GetFinalizers() {
-		if finalizer == spaceFinalizer {
+		if finalizer == common.SpaceFinalizer {
 			finalizerFound = true
 		} else {
 			newFinalizers = append(newFinalizers, finalizer)

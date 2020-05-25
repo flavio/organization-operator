@@ -5,6 +5,7 @@ kind: CustomResourceDefinition
 metadata:
   name: spaces.k8s.suse.com
 spec:
+  preserveUnknownFields: false
   conversion:
     strategy: Webhook
     webhookClientConfig:
