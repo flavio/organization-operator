@@ -198,12 +198,7 @@ func (r *OrganizationReconciler) reconcileRBACRole(
 		},
 		found)
 
-	if err == nil {
-		reqLogger.Info(
-			"Found Role",
-			"Namespace", found.Namespace,
-			"Name", found.Name)
-	} else if err != nil && errors.IsNotFound(err) {
+	if err != nil && errors.IsNotFound(err) {
 		reqLogger.Info(
 			"Creating a new RBAC Role",
 			"Role.Namespace", role.Namespace,
@@ -217,8 +212,23 @@ func (r *OrganizationReconciler) reconcileRBACRole(
 			"Created RBAC Role",
 			"Role.Namespace", role.Namespace,
 			"Role.Name", role.Name)
+		return nil
 	} else if err != nil {
 		return err
+	}
+
+	reqLogger.Info(
+		"Found Role",
+		"Namespace", found.Namespace,
+		"Name", found.Name)
+
+	if !common.ArePolicyRulesEqual(found.Rules, role.Rules) {
+		found.Rules = role.Rules
+
+		reqLogger.Info("Updating RBAC Role to have the same policy rules",
+			"Namespace", found.Namespace,
+			"Name", found.Name)
+		return r.Client.Update(ctx, found)
 	}
 
 	return nil

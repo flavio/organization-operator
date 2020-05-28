@@ -50,7 +50,7 @@ This kubernetes operator is created using [kubebuilder](https://github.com/kuber
 What is currently missing:
 
   * [ ] `SpaceExtraConfig` CR
-  * [ ] Reconcile objects if they are changed; deleted ones are reconciled but changes are not processed right now.
+  * [x] Reconcile objects if they are changed; deleted ones are reconciled but changes are not processed right now.
   * [ ] Testing, linting
   * [ ] Deployment resources: helm charts, container image,...
 
