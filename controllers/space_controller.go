@@ -232,11 +232,7 @@ func (r *SpaceReconciler) handleFinalizer(instance *k8sv1alpha1.Space, organizat
 
 func (r *SpaceReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	builder := ctrl.NewControllerManagedBy(mgr)
-	err := builder.For(&k8sv1alpha1.Space{}).
-		Complete(r)
-	if err != nil {
-		return err
-	}
+	builder = builder.For(&k8sv1alpha1.Space{})
 
 	// Watch for changes to the namespace related with the resource Space
 	// Note well: we cannot leverage an ownership relation because Space
@@ -296,7 +292,7 @@ func (r *SpaceReconciler) SetupWithManager(mgr ctrl.Manager) error {
 		},
 	)
 
-	return nil
+	return builder.Complete(r)
 }
 
 func namespaceAssociatedWithSpace(space *k8sv1alpha1.Space, organization *k8sv1alpha1.Organization) *corev1.Namespace {
