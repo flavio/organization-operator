@@ -33,6 +33,10 @@ The proposal requires that nobody, except for platform admins, have write
 access to the kubernetes namespace objects.
 Note well: that happens by default unless specific RBAC policies are created on the cluster.
 
+Once Namespace objects are "secured", it's possible to use a solution like the
+[namespace-configuration-operator](https://github.com/redhat-cop/namespace-configuration-operator)
+to manange them in a centralized way.
+
 ## Architecture
 
 The architecture of the Organization Controller can be find inside of
